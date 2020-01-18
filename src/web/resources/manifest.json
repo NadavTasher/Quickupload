@@ -1,0 +1,22 @@
+{
+  "name": "Quickupload",
+  "short_name": "Quickupload",
+  "description": "Upload your files with a single command!",
+  "start_url": "../index.html",
+  "background_color": "#7c5151",
+  "theme_color": "#7c5151",
+  "display": "standalone",
+  "orientation": "natural",
+  "icons": [
+    {
+      "src": "../images/icons/app/icon.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "../images/icons/app/icon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
