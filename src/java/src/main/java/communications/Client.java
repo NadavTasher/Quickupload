@@ -6,8 +6,7 @@ import java.util.Random;
 
 public class Client {
 
-    //    private static final File FILES = new File("/var/www/html/files");
-    private static final File FILES = new File("/home/nadav/Documents/Junktime");
+    private static final File FILES = new File("/var/www/html/files");
 
     private static final int MAX_SIZE = 1024 * 1024;
 

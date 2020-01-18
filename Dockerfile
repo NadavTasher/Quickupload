@@ -1,12 +1,13 @@
 FROM php:7.3-apache
 # Install java
+RUN mkdir -p /usr/share/man/man1
 RUN apt-get update && apt-get install -y default-jre
 # Install supervisor
 RUN apt-get -y install supervisor
 # Enable mods
 RUN a2enmod headers
 # Copy WebApp to /var/www/html
-COPY src /var/www/html
+COPY src/web /var/www/html
 # Change ownership of /var/www
 RUN chown www-data /var/www/ -R
 # Change permissions of /var/www
