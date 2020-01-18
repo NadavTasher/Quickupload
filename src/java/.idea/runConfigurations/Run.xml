@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Run" type="Application" factoryName="Application">
+    <envs>
+      <env name="URL" value="https://blob.host/files/" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="Main" />
+    <module name="Quickupload.main" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
