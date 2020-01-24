@@ -27,4 +27,5 @@ task executable(type: Jar) {
 }
 
 dependencies {
+    implementation "commons-io:commons-io:2.6"
 }

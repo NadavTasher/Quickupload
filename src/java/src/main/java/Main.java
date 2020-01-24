@@ -5,7 +5,8 @@ import java.io.IOException;
 public class Main {
 
     // Server port
-    private static final int PORT = 1;
+//    private static final int PORT = 1;
+    private static final int PORT = 10000;
 
     /**
      * Main function.

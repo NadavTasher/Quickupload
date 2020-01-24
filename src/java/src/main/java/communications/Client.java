@@ -1,23 +1,20 @@
 package communications;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.Socket;
 import java.util.Random;
 
 public class Client {
 
-    private static final File FILES = new File("/var/www/html/files");
+    //    private static final File FILES = new File("/var/www/html/files");
+    private static final File FILES = new File("/home/nadav/Documents/Junktime");
 
     private static final int MAX_SIZE = 1024 * 1024;
 
     private String id = null;
-
-    // Socket IO
-    BufferedReader reader = null;
-    BufferedWriter writer = null;
-
-    // File IO
-    FileWriter fileWriter = null;
 
     public Client(Socket socket) {
         this.id = random(16);
@@ -26,22 +23,22 @@ public class Client {
             @Override
             public void run() {
                 try {
-                    fileWriter = new FileWriter(new File(FILES, id));
-                    reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                    writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-                    // Listen on reader
-                    int character = 0;
-                    while (reader.ready() && character < MAX_SIZE) {
-                        fileWriter.write(reader.read());
-                        character++;
+                    // Pipe IO
+                    InputStream socketInput = socket.getInputStream();
+                    OutputStream socketOutput = socket.getOutputStream();
+                    OutputStream fileOutput = new FileOutputStream(new File(FILES, id));
+                    for (int character = 0; (socketInput.available() > 0) && (character = socketInput.read()) >= 0; ) {
+                        fileOutput.write(character);
                     }
-                    fileWriter.flush();
-                    fileWriter.close();
-                    writer.write(System.getenv("URL") + id);
-                    writer.newLine();
-                    writer.flush();
-                    writer.close();
-                    reader.close();
+                    // Display link
+                    socketOutput.write((System.getenv("URL") + id + "\r\n").getBytes());
+                    // Flush all
+                    fileOutput.flush();
+                    socketOutput.flush();
+                    // Close all
+                    fileOutput.close();
+                    socketOutput.close();
+                    socketInput.close();
                     socket.close();
                 } catch (Exception ignored) {
                 }
